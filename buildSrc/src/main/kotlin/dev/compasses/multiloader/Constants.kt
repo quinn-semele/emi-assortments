@@ -3,23 +3,23 @@ package dev.compasses.multiloader
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 object Constants {
-    const val GROUP = "com.example.examplemod"
-    const val MOD_ID = "examplemod"
-    const val MOD_NAME = "Example Mod"
+    const val GROUP = "dev.compasses.emi_assortments"
+    const val MOD_ID = "emi_assortments"
+    const val MOD_NAME = "EMI Assortments"
     const val MOD_VERSION = "1.0.0"
-    const val LICENSE = "CC0-1.0"
+    const val LICENSE = "LGPL-3.0"
     const val DESCRIPTION = """
-        Prints some information at start up to test this template.
+        Includes 3 EMI Plugins: EMI Ores, EMI Trades, and EMI Loot.
     """
 
-    const val HOMEPAGE = "https://www.curseforge.com/minecraft/mc-mods/example-mod"
-    const val ISSUE_TRACKER = "https://github.com/Ghost/example-mod/issues"
-    const val SOURCES_URL = "https://github.com/Ghost/example-mod"
+    const val HOMEPAGE = "https://www.curseforge.com/minecraft/mc-mods/emi-assortments"
+    const val ISSUE_TRACKER = "https://github.com/quinn-semele/emi-assortments/issues"
+    const val SOURCES_URL = "https://github.com/quinn-semele/emi-assortments"
 
     @Suppress("RedundantNullableReturnType")
     val curseforgeProperties: CurseForgeProperties? = object : CurseForgeProperties() {
         override val projectId = "000000"
-        override val projectSlug = "examplemod"
+        override val projectSlug = "emi-assortments"
     }
 
     @Suppress("RedundantNullableReturnType")
@@ -32,7 +32,12 @@ object Constants {
     const val COMPARE_URL = "https://www.example.com/author/repo/compare/"
 
     val CONTRIBUTORS = linkedMapOf(
-        "Quinn Semele" to "Project Owner",
+        "Quinn Semele" to "EMI Assortments Developer / Porter",
+        "Abbie" to "EMI Ores Developer",
+        "Prismwork" to "EMI Trades Developer",
+        "Flamarine" to "EMI Trades Developer",
+        "fzzyhmstrs" to "EMI Loot Developer",
+        "lxly9" to "EMI Loot Artist",
     )
 
     val CREDITS = linkedMapOf<String, String>(

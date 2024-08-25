@@ -1,3 +1,4 @@
+import dev.compasses.emi_assortments.ModConstants
 import dev.compasses.multiloader.Constants
 import dev.compasses.multiloader.extension.DependencyType
 import dev.compasses.multiloader.extension.MultiLoaderExtension
@@ -120,6 +121,9 @@ tasks.processResources {
 
         "neoforge_version" to Constants.NEOFORGE_VERSION,
         "fml_version_constraint" to Constants.FML_CONSTRAINT,
+
+        "emi_version" to ModConstants.EMI_VERSION,
+        "nf_emi_constraint" to ModConstants.EMI_CONSTRAINT
     )
 
     inputs.properties(replacements)

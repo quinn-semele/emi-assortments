@@ -1,10 +1,11 @@
 import dev.compasses.emi_assortments.ModConstants
+import dev.compasses.multiloader.extension.MultiLoaderExtension
 
 plugins {
-    id("multiloader-neoforge")
+    id("multiloader-loader")
 }
 
-multiloader {
+extensions.configure<MultiLoaderExtension>("multiloader") {
     mods {
         create("emi") {
             required()
@@ -12,7 +13,7 @@ multiloader {
             requiresRepo("TerraformersMC Maven", "https://maven.terraformersmc.com/", setOf("dev.emi"))
 
             artifacts {
-                implementation("dev.emi:emi-neoforge:${ModConstants.EMI_VERSION}")
+                add("modImplementation", "dev.emi:emi-fabric:${ModConstants.EMI_VERSION}")
             }
         }
     }
