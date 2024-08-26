@@ -31,14 +31,18 @@ gradle.taskGraph.whenReady {
     }
 }
 
-// This feels like a hack but I can't really think of a way to do this properly.
+// This feels like a hack, but I can't really think of a way to do this properly.
 evaluationDependsOnChildren()
+
+val requestedProjects = providers.environmentVariable("MULTILOADER_PUBLISH_PROJECTS").getOrElse("neoforge,fabric,quilt").split(",")
 
 val projectsToPublish = mapOf(
     "NeoForge" to findProject(":neoforge"),
     "Fabric" to findProject(":fabric"),
     "Quilt" to findProject(":quilt")
-).filter { it.value != null }.mapValues { (_, loader) -> loader!! }
+).filter { it.value != null }
+ .mapValues { (_, loader) -> loader!! }
+ .filter { it.value.name in requestedProjects }
 
 val modChangelog = providers.provider {
     val compareTag = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git describe --tags --abbrev=0")).trim()
@@ -85,10 +89,7 @@ publishMods {
         ReleaseType.STABLE
     }
 
-    dryRun = providers.provider {
-        (Constants.curseforgeProperties != null && !curseforgeOptions!!.get().accessToken.isPresent) ||
-                 (Constants.modrinthProperties != null && !modrinthOptions!!.get().accessToken.isPresent)
-    }
+    dryRun = providers.environmentVariable("MULTILOADER_DRY_RUN").map { true }.orElse(false)
 }
 
 val publishTasks = projectsToPublish.map { (name, loader) ->

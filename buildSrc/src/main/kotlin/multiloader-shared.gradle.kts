@@ -1,6 +1,6 @@
-import dev.compasses.emi_assortments.ModConstants
 import dev.compasses.multiloader.Constants
 import dev.compasses.multiloader.extension.DependencyType
+import dev.compasses.multiloader.extension.ModDependency
 import dev.compasses.multiloader.extension.MultiLoaderExtension
 import dev.compasses.multiloader.extension.RepositoryExclusions
 import java.net.URI
@@ -121,10 +121,8 @@ tasks.processResources {
 
         "neoforge_version" to Constants.NEOFORGE_VERSION,
         "fml_version_constraint" to Constants.FML_CONSTRAINT,
-
-        "emi_version" to ModConstants.EMI_VERSION,
-        "nf_emi_constraint" to ModConstants.EMI_CONSTRAINT
     )
+    replacements.putAll(Constants.EXTRA_MOD_INFO_REPLACEMENTS)
 
     inputs.properties(replacements)
     filesMatching(listOf("fabric.mod.json", "quilt.mod.json", "META-INF/neoforge.mods.toml", "*.mixins.json", "*.mcmeta")) {
@@ -132,15 +130,9 @@ tasks.processResources {
     }
 }
 
-val multiLoaderExtension = extensions.create("multiloader", MultiLoaderExtension::class)
-
-multiLoaderExtension.mods.configureEach {
-    type.convention(DependencyType.OPTIONAL)
-    curseforgeName.convention(name)
-    modrinthName.convention(name)
-    enabledAtRuntime.convention(false)
-    sourceDirectory.convention(project.layout.projectDirectory.dir("src/main/${name.replace("-", "_")}"))
-}
+val multiLoaderExtension = extensions.create("multiloader", MultiLoaderExtension::class, project.objects.domainObjectContainer(ModDependency::class) { name ->
+    ModDependency(name, project.objects)
+})
 
 project.afterEvaluate {
     val repositories: MutableMap<URI, RepositoryExclusions> = mutableMapOf()
@@ -194,7 +186,7 @@ project.afterEvaluate {
     sourceSets.main.configure {
         val directories = multiLoaderExtension.mods.filter { it.type.get() != DependencyType.DISABLED }
             .map { it.sourceDirectory }
-            .filter { it.asFile.get().exists() }
+            .filter { project.file(it).exists() }
 
         java.srcDirs(directories)
     }

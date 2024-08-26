@@ -1,5 +1,6 @@
 package dev.compasses.multiloader
 
+import dev.compasses.emi_assortments.ModConstants
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 object Constants {
@@ -42,6 +43,11 @@ object Constants {
 
     val CREDITS = linkedMapOf<String, String>(
 
+    )
+
+    val EXTRA_MOD_INFO_REPLACEMENTS = mapOf(
+        "emi_version" to ModConstants.EMI_VERSION,
+        "nf_emi_constraint" to ModConstants.EMI_CONSTRAINT
     )
 
     val JAVA_VERSION = JavaLanguageVersion.of(21)
