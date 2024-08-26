@@ -19,13 +19,13 @@ object Constants {
 
     @Suppress("RedundantNullableReturnType")
     val curseforgeProperties: CurseForgeProperties? = object : CurseForgeProperties() {
-        override val projectId = "000000"
+        override val projectId = "1091177"
         override val projectSlug = "emi-assortments"
     }
 
     @Suppress("RedundantNullableReturnType")
     val modrinthProperties: ModrinthProperties? = object : ModrinthProperties() {
-        override val projectId: String = "000000"
+        override val projectId: String = "YDoiVqn0"
     }
 
     const val PUBLISH_WEBHOOK_VARIABLE = "PUBLISH_WEBHOOK"
