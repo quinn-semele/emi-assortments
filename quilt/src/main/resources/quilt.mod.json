@@ -20,7 +20,16 @@
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
-      "emi": "io.github.prismwork.emitrades.EMITradesPlugin"
+      "client": [
+        "cc.abbie.emi_ores.fabric.client.EmiOresFabricClient"
+      ],
+      "main": [
+        "cc.abbie.emi_ores.fabric.EmiOresFabric"
+      ],
+      "emi": [
+        "io.github.prismwork.emitrades.EMITradesPlugin",
+        "cc.abbie.emi_ores.compat.emi.EmiOresEmiPlugin"
+      ]
     },
     "depends": [
       {
@@ -45,7 +54,5 @@
       }
     ]
   },
-  "minecraft": {
-    "environment": "client"
-  }
+  "mixin": [ "emi_ores.mixins.json" ]
 }

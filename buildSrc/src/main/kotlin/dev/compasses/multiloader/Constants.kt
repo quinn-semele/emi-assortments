@@ -8,7 +8,7 @@ object Constants {
     const val MOD_ID = "emi_assortments"
     const val MOD_NAME = "EMI Assortments"
     const val MOD_VERSION = "1.0.0"
-    const val LICENSE = "LGPL-3.0"
+    const val LICENSE = "LGPL-3.0-only"
     const val DESCRIPTION = """
         Includes 3 EMI Plugins: EMI Ores, EMI Trades, and EMI Loot.
     """
